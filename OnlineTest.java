@@ -1,8 +1,5 @@
 package onlinetest3;
 
-/*Online Java Paper Test*/
-
-import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
@@ -12,11 +9,14 @@ class OnlineTest extends JFrame implements ActionListener
 	JRadioButton jb[]=new JRadioButton[5];
 	JButton b1,b2,b3,b4;
 	ButtonGroup bg;
-	int count=0,current=0,x=1,y=1,now=0;
+	int count=0,current=0,x=1,y=1,now=0,i,a[];
+	boolean f;
 	int m[]=new int[10];	
 	OnlineTest(String s)
 	{
 		super(s);
+		f=false;
+		a=new int[10];
 		l=new JLabel();
 		add(l);
 		bg=new ButtonGroup();
@@ -68,8 +68,9 @@ class OnlineTest extends JFrame implements ActionListener
 		}
 		if(e.getSource()==b1)
 		{
-			if(check())
-				count=count+1;
+			/*if(check())
+				count=count+1;*/
+			check();
 			current++;
 			set();
 			
@@ -98,8 +99,9 @@ class OnlineTest extends JFrame implements ActionListener
 		{
 		if(e.getActionCommand().equals("Bookmark"+y))
 		{
-			if(check())
-				count=count+1;
+			/*if(check())
+				count=count+1;*/
+			check();
 			now=current;
 			current=m[y];
 			set();
@@ -112,9 +114,13 @@ class OnlineTest extends JFrame implements ActionListener
 		//if(e.getSource()==b4)
 		{
 			b1.setEnabled(false);b2.setEnabled(false);b3.setEnabled(false);b4.setEnabled(false);
-			if(check())
-				count=count+1;
+			/*if(check())
+				count=count+1;*/
+			check();
 			current++;
+			for(i=0;i<10;i++)
+				if(a[i]==1)count++;
+			//for(i=0;i<10;i++)System.out.print(a[i]);
 			JOptionPane.showMessageDialog(this,"Correct answers="+count+"\n\nThanks for taking the test!");
 			System.exit(0);
 		}
@@ -154,8 +160,8 @@ class OnlineTest extends JFrame implements ActionListener
 		}
 		if(current==5)
 		{
-			l.setText("Que6: Which one among these is not a keyword?");
-			jb[0].setText("class");jb[1].setText("int");jb[2].setText("get");jb[3].setText("if");
+			l.setText("Que6: How many access specifiers are there in Java?");
+			jb[0].setText("1");jb[1].setText("2");jb[2].setText("3");jb[3].setText("4");
 		}
 		if(current==6)
 		{
@@ -185,32 +191,29 @@ class OnlineTest extends JFrame implements ActionListener
 	}
 	boolean check()
 	{
+		f=false;
 		if(current==0)
-		{
-			
-			//jb[this].setSelected(true);
-			return(jb[1].isSelected());
-		}
-			
+			f=jb[1].isSelected();
 		if(current==1)
-			return(jb[2].isSelected());
+			f=jb[2].isSelected();
 		if(current==2)
-			return(jb[3].isSelected());
+			f=jb[3].isSelected();
 		if(current==3)
-			return(jb[0].isSelected());
+			f=jb[0].isSelected();
 		if(current==4)
-			return(jb[3].isSelected());
+			f=jb[3].isSelected();
 		if(current==5)
-			return(jb[2].isSelected());
+			f=jb[3].isSelected();
 		if(current==6)
-			return(jb[1].isSelected());
+			f=jb[1].isSelected();
 		if(current==7)
-			return(jb[3].isSelected());
+			f=jb[3].isSelected();
 		if(current==8)
-			return(jb[1].isSelected());
-		if(current==9)
-			return(jb[2].isSelected());
-		return false;
+			f=jb[1].isSelected();
+		if(current==9) 
+			f=jb[2].isSelected();
+		a[current]=f?1:0;
+		return f;
 	}
 	public static void main(String s[])
 	{
