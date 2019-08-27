@@ -57,7 +57,7 @@ class OnlineTest extends JFrame implements ActionListener
 		setLocation(650,300);
 		setVisible(true);
 		//setSize(600,350);
-		setSize(700,500);
+		setExtendedState(JFrame.MAXIMIZED_BOTH);
 	}
 	public void actionPerformed(ActionEvent e)
 	{
